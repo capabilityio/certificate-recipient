@@ -40,4 +40,48 @@ module.exports = function(message, context)
     }
     const workflow = new events.EventEmitter();
     setImmediate(() => workflow.emit("start", {}));
+    workflow.on("start", dataBag => workflow.emit("store certificate in S3 bucket", dataBag));
+    workflow.on("store certificate in S3 bucket", dataBag =>
+        {
+            const params =
+            {
+                Body: message.certificate,
+                Bucket: self._config.aws.s3.bucket,
+                Key: `certificate/${message.domain.split(".").reverse().join(".")}`
+            };
+            self._s3.putObject(params, (error, resp) =>
+                {
+                    if (error)
+                    {
+                        return self._end(self.SERVICE_UNAVAILABLE);
+                    }
+                    return workflow.emit("store key in S3 bucket", dataBag);
+                }
+            );
+        }
+    );
+    workflow.on("store key in S3 bucket", dataBag =>
+        {
+            const params =
+            {
+                Body: message.key,
+                Bucket: self._config.aws.s3.bucket,
+                Key: `key/${message.domain.split(".").reverse().join(".")}`
+            };
+            self._s3.putObject(params, (error, resp) =>
+                {
+                    if (error)
+                    {
+                        return self._end(self.SERVICE_UNAVAILABLE);
+                    }
+                    return self._end(undefined,
+                        {
+                            statusCode: 200,
+                            message: "OK"
+                        }
+                    );
+                }
+            );
+        }
+    );
 };

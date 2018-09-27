@@ -15,18 +15,15 @@
  */
 "use strict";
 
-const Joi = require("joi");
-
-module.exports = Joi.object().keys(
+module.exports = (done, count) =>
+{
+    let doneCount = 0;
+    return () =>
     {
-        aws: Joi.object().keys(
-            {
-                s3: Joi.object().keys(
-                    {
-                        bucket: Joi.string().required()
-                    }
-                ).required()
-            }
-        ).required()
+        doneCount++;
+        if (doneCount == count)
+        {
+            done();
+        }
     }
-).required();
+};

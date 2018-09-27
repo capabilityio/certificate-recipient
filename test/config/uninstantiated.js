@@ -15,4 +15,13 @@
  */
 "use strict";
 
-module.exports = {};
+module.exports =
+{
+    aws:
+    {
+        s3:
+        {
+            bucket: "my-s3-bucket"
+        }
+    }
+};

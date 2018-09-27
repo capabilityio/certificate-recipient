@@ -17,4 +17,16 @@
 
 const Joi = require("joi");
 
-module.exports = {};
+module.exports = Joi.object().keys(
+    {
+        aws: Joi.object().keys(
+            {
+                s3: Joi.object().keys(
+                    {
+                        bucket: Joi.string().required()
+                    }
+                ).required()
+            }
+        ).required()
+    }
+).required();
