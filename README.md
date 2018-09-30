@@ -17,7 +17,7 @@ Recipient of certificates delivered by Certificate Manager Service.
 
 ## Installation
 
-The intended usage of `certificate-recipient` is as part of [capability-cli](https://github.com/capabilityio/capability-cli) `certificate-manager setup aws` functionality.
+The intended usage of `certificate-recipient` is as part of [capability-cli](https://github.com/capabilityio/capability-cli) `certificate-manager config aws` functionality.
 
 To install locally:
 
@@ -27,7 +27,7 @@ npm install certificate-recipient
 
 ## Usage
 
-This module is intended to be executed as an AWS Lambda function as part of [capability-cli](https://github.com/capabilityio/capability-cli) `certificate-manager setup aws` functionality that configures this module as well as grants the requisite permissions and creates required supporting infrastructure.
+This module is intended to be executed as an AWS Lambda function as part of [capability-cli](https://github.com/capabilityio/capability-cli) `certificate-manager config aws` functionality that configures this module as well as grants the requisite permissions and creates required supporting infrastructure.
 
 ## Tests
 
