@@ -16,13 +16,12 @@
 "use strict";
 
 const events = require("events");
-const Joi = require("@hapi/joi");
 const schema = require("../schema/receiveCertificate.js");
 
 module.exports = function(message, context)
 {
     const self = this;
-    const validationResult = Joi.validate(message, schema,
+    const validationResult = schema.validate(message,
         {
             abortEarly: true,
             convert: true

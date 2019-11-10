@@ -38,7 +38,6 @@ process.on("uncaughtException", error =>
 
 const AWS = require("aws-sdk");
 const events = require("events");
-const Joi = require("@hapi/joi");
 const pkg = require("./package.json");
 
 class Recipient extends events.EventEmitter
@@ -55,9 +54,8 @@ class Recipient extends events.EventEmitter
 
         self._config = config;
 
-        const configValidationResult = Joi.validate(
+        const configValidationResult = require("./schema/config/instantiated.js").validate(
             self._config,
-            require("./schema/config/instantiated.js"),
             {
                 abortEarly: false,
                 convert: false
@@ -73,9 +71,8 @@ class Recipient extends events.EventEmitter
 
     static config(config, callback)
     {
-        const configValidationResult = Joi.validate(
+        const configValidationResult = require("./schema/config/uninstantiated.js").validate(
             config,
-            require("./schema/config/uninstantiated.js"),
             {
                 abortEarly: false,
                 convert: false
