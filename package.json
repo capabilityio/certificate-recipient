@@ -10,16 +10,16 @@
     "test": "npm run assert-aws-lambda-node && npm list 1>/dev/null && jest --env node"
   },
   "scriptvars": {
-    "aws_lambda_node": "v8.10"
+    "aws_lambda_node": "v10"
   },
   "devDependencies": {
-    "capability-token": "0.4.0",
-    "capability-uri": "0.3.0",
+    "capability-token": "0.4.1",
+    "capability-uri": "0.3.1",
     "clone": "2.1.2",
-    "jest": "23.6.0"
+    "jest": "24.9.0"
   },
   "dependencies": {
-    "joi": "13.7.0"
+    "@hapi/joi": "15.1.1"
   },
   "contributors": [
     "Tristan Slominski <tristan.slominski@gmail.com>"

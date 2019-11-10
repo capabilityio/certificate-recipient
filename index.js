@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Capability LLC. All Rights Reserved.
+ * Copyright 2018-2019 Capability LLC. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ process.on("uncaughtException", error =>
 
 const AWS = require("aws-sdk");
 const events = require("events");
-const Joi = require("joi");
+const Joi = require("@hapi/joi");
 const pkg = require("./package.json");
 
 class Recipient extends events.EventEmitter
