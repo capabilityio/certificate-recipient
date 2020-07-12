@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Capability LLC. All Rights Reserved.
+ * Copyright 2018-2020 Capability LLC. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 const clone = require("clone");
 const countdown = require("../test/countdown.js");
 const fs = require("fs");
+const errors = require("../errors");
 
 const Recipient = require("../index.js");
 
@@ -59,11 +60,9 @@ describe("RecieveCertificate", () =>
                             {
                                 expect(error).toBe(undefined);
                                 expect(resp).toEqual(
-                                    {
-                                        statusCode: 400,
-                                        error: "Bad Request",
-                                        message: `Invalid ${prop}`
-                                    }
+                                    new errors.BadRequest(
+                                        `Invalid ${prop}`
+                                    )
                                 );
                                 done();
                             }
@@ -114,7 +113,7 @@ describe("RecieveCertificate", () =>
                     (error, resp) =>
                     {
                         expect(error).toBe(undefined);
-                        expect(resp).toEqual(Recipient.SERVICE_UNAVAILABLE);
+                        expect(resp).toEqual(new errors.ServiceUnavailable());
                         finish();
                     }
                 );
@@ -166,7 +165,7 @@ describe("RecieveCertificate", () =>
                     (error, resp) =>
                     {
                         expect(error).toBe(undefined);
-                        expect(resp).toEqual(Recipient.SERVICE_UNAVAILABLE);
+                        expect(resp).toEqual(new errors.ServiceUnavailable());
                         finish();
                     }
                 );

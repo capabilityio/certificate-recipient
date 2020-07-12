@@ -13,6 +13,7 @@ Recipient of certificates delivered by Certificate Manager Service.
   * [Tests](#tests)
   * [Documentation](#documentation)
     * [Recipient.handle(message, context, callback)](#recipienthandlemessage-context-callback)
+    * [errors](#errors)
   * [Releases](#releases)
 
 ## Installation
@@ -49,6 +50,16 @@ npm test
   * `callback`: _Function_ `(error, resp) => {}` AWS Lambda callback.
 
 Stores the `certificate` and `key` in configured S3 bucket. Each file is stored in the `certificate` or `key` folder in a file named with reverse `domain`. For example, if the `domain` is `my.domain.example.com` and the S3 bucket is `my-certs-bucket`, then `certificate` content will be in `s3:///my-certs-bucket/certificate/com.example.domain.my` and `key` content will be in `s3:///my-certs-bucket/key/com.example.domain.my`.
+
+### Errors
+
+#### BadRequest
+
+Inbound request message does not match schema.
+
+#### ServiceUnavailable
+
+The certificate recipient is unavailable, please try again soon.
 
 ## Releases
 

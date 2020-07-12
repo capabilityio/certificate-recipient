@@ -15,6 +15,8 @@
  */
 "use strict";
 
+const errors = require("./errors");
+
 const Recipient = require("./index.js");
 
 const INSTANTIATED_CONFIG = require("./test/config/instantiated.js");
@@ -40,7 +42,7 @@ it(`should instantiate on static "handle()" call`, done =>
                     {
                         delete process.env.USERDATA;
                         expect(error).toBe(undefined);
-                        expect(response).toEqual(Recipient.SERVICE_UNAVAILABLE);
+                        expect(response).toEqual(new errors.ServiceUnavailable());
                         done();
                     }
                 );

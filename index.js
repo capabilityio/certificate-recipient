@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Capability LLC. All Rights Reserved.
+ * Copyright 2018-2020 Capability LLC. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,7 @@
  */
 "use strict";
 
-const SERVICE_UNAVAILABLE =
-{
-    statusCode: 503,
-    error: "Service Unavailable",
-    message: "Please try again soon"
-};
+const errors = require("./errors");
 
 // Do not leak error information when loading code.
 // Unexpected errors may return 503 Service Unavailable or just exit.
@@ -30,7 +25,7 @@ process.on("uncaughtException", error =>
         console.error(error);
         if (_callback)
         {
-            return _callback(undefined, SERVICE_UNAVAILABLE);
+            return _callback(undefined, new errors.ServiceUnavailable());
         }
         process.exit(1);
     }
@@ -47,7 +42,6 @@ class Recipient extends events.EventEmitter
         super();
 
         const self = this;
-        self.SERVICE_UNAVAILABLE = SERVICE_UNAVAILABLE;
         self._config = config;
         self.name = pkg.name;
         self.version = pkg.version;
@@ -109,7 +103,7 @@ class Recipient extends events.EventEmitter
         const self = this;
         if (context.testAbort)
         {
-            return self._end(SERVICE_UNAVAILABLE);
+            return self._end(new errors.ServiceUnavailable());
         }
         return self._receiveCertificate(message, context);
     }
@@ -124,7 +118,6 @@ class Recipient extends events.EventEmitter
     }
 };
 
-Recipient.SERVICE_UNAVAILABLE = SERVICE_UNAVAILABLE;
 Recipient.instance = undefined;
 Recipient.version = pkg.version;
 
