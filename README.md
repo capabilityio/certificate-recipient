@@ -1,8 +1,6 @@
 # certificate-recipient
 
-_Stability: 1 - [Experimental](https://github.com/tristanls/stability-index#stability-1---experimental)_
-
-[![NPM version](https://badge.fury.io/js/certificate-recipient.svg)](http://npmjs.org/package/certificate-recipient)
+_Stability: 0 - [Deprecated](https://github.com/tristanls/stability-index#stability-0---deprecated)_
 
 Recipient of certificates delivered by Certificate Manager Service.
 
